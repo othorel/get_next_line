@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olthorel <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:18:23 by olthorel          #+#    #+#             */
-/*   Updated: 2024/11/14 17:01:05 by olthorel         ###   ########.fr       */
+/*   Updated: 2024/11/14 18:21:24 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ char	*get_next_line(int fd)
 	buffer = next_line(buffer);
 	return (line);
 }
-/*
-int	main(void)
+
+/* int	main(void)
 {
 	int fd = open("test.txt", O_RDONLY);
 	if (fd < 0)
@@ -123,4 +123,4 @@ int	main(void)
 	}
 	close(fd);
 	return (0);
-}*/
+} */
