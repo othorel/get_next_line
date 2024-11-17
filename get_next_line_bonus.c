@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:18:23 by olthorel          #+#    #+#             */
-/*   Updated: 2024/11/17 16:58:33 by olthorel         ###   ########.fr       */
+/*   Created: 2024/11/17 15:31:32 by olthorel          #+#    #+#             */
+/*   Updated: 2024/11/17 16:42:16 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*next_line(char *str)
 {
@@ -19,6 +19,8 @@ char	*next_line(char *str)
 	int		j;
 
 	i = 0;
+	if (!str)
+		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
 	if (!str[i])
@@ -62,7 +64,7 @@ char	*ft_read(int fd, char *str)
 		buffer[b_read] = '\0';
 		str = ft_free(str, buffer);
 	}
-	return (str);
+	return (free(buffer), str);
 }
 
 char	*ft_get_line(char *str)
@@ -71,7 +73,7 @@ char	*ft_get_line(char *str)
 	int		i;
 
 	i = 0;
-	if (!str || !str[i])
+	if (!str[0] || !str)
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
@@ -98,7 +100,8 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd <= 0 || BUFFER_SIZE <= 0)
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = ft_read(fd, buffer);
 	if (!buffer)

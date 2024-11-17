@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:00:26 by olthorel          #+#    #+#             */
-/*   Updated: 2024/11/17 17:03:00 by olthorel         ###   ########.fr       */
+/*   Created: 2024/11/17 15:25:58 by olthorel          #+#    #+#             */
+/*   Updated: 2024/11/17 17:03:30 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
 	if (!str)
-	return (0);
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
