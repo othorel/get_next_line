@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:00:26 by olthorel          #+#    #+#             */
-/*   Updated: 2024/11/17 17:03:00 by olthorel         ###   ########.fr       */
+/*   Updated: 2024/11/18 10:56:42 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 
-	if (!str)
-	return (0);
 	i = 0;
 	while (str[i])
 		i++;
@@ -70,4 +68,18 @@ char	*ft_free(char *buffer, char *b)
 	tmp = ft_strjoin(buffer, b);
 	free(buffer);
 	return (tmp);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*str;
+	size_t	i;
+
+	str = (char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = '\0';
+		i++;
+	}
 }

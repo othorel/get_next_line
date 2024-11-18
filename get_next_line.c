@@ -6,13 +6,28 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:18:23 by olthorel          #+#    #+#             */
-/*   Updated: 2024/11/17 16:58:33 by olthorel         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:09:02 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*next_line(char *str)
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	size_t	total_size;
+	void	*ptr;
+
+	total_size = nmemb * size;
+	if (nmemb != 0 && total_size / nmemb != size)
+		return (NULL);
+	ptr = (void *)malloc(total_size);
+	if (!ptr)
+		return (NULL);
+	ft_bzero(ptr, total_size);
+	return (ptr);
+}
+
+char	*ft_next_line(char *str)
 {
 	char	*new;
 	int		i;
@@ -26,31 +41,28 @@ char	*next_line(char *str)
 		free(str);
 		return (NULL);
 	}
-	new = (char *)malloc(sizeof(char) * (ft_strlen(str) - i + 1));
+	new = ft_calloc(sizeof(char), ft_strlen(str) - i + 1);
 	if (!new)
+	{
+		free(str);
 		return (NULL);
+	}
 	i++;
 	j = 0;
 	while (str[i])
 		new[j++] = str[i++];
-	new[j] = '\0';
 	free(str);
 	return (new);
 }
 
-char	*ft_read(int fd, char *str)
+char	*ft_read_and_stock(int fd, char *str)
 {
 	char	*buffer;
 	int		b_read;
 
 	if (!str)
-	{
-		str = malloc(sizeof(char) * 1);
-		if (!str)
-			return (NULL);
-		str[0] = '\0';
-	}
-	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		str = ft_calloc(1, 1);
+	buffer = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
 	b_read = 1;
@@ -58,24 +70,29 @@ char	*ft_read(int fd, char *str)
 	{
 		b_read = read(fd, buffer, BUFFER_SIZE);
 		if (b_read == -1)
-			return (free(str), free(buffer), NULL);
-		buffer[b_read] = '\0';
+		{
+			free(buffer);
+			free(str);
+			return (NULL);
+		}
+		buffer[b_read] = 0;
 		str = ft_free(str, buffer);
 	}
+	free(buffer);
 	return (str);
 }
 
-char	*ft_get_line(char *str)
+char	*ft_extract_line(char *str)
 {
 	char	*new;
 	int		i;
 
 	i = 0;
-	if (!str || !str[i])
+	if (!str[i])
 		return (NULL);
 	while (str[i] && str[i] != '\n')
 		i++;
-	new = (char *)malloc(sizeof(char) * (i + 2));
+	new = ft_calloc(sizeof(char), i + 2);
 	if (!new)
 		return (NULL);
 	i = 0;
@@ -84,44 +101,52 @@ char	*ft_get_line(char *str)
 		new[i] = str[i];
 		i++;
 	}
-	if (str[i] && str[i] == '\n')
+	if (str[i] == '\n')
 	{
 		new[i] = '\n';
 		i++;
 	}
-	new[i] = '\0';
 	return (new);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[1024];
 	char		*line;
 
-	if (fd <= 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	buffer = ft_read(fd, buffer);
-	if (!buffer)
+	buffer[fd] = ft_read_and_stock(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = ft_get_line(buffer);
-	buffer = next_line(buffer);
+	line = ft_extract_line(buffer[fd]);
+	buffer[fd] = ft_next_line(buffer[fd]);
+	if (!buffer[fd])
+		free(buffer[fd]);
 	return (line);
 }
 
 /* int	main(void)
 {
-	int fd = open("test.txt", O_RDONLY);
-	if (fd < 0)
+	int fd1 = open("test1.txt", O_RDONLY);
+	int fd2 = open("test2.txt", O_RDONLY);
+	char *line1;
+	char *line2;
+	
+	while ((line1 = get_next_line(fd1)) || (line2 = get_next_line(fd2)))
 	{
-		perror("Error open !");
-		return (1);
+		if (line1)
+		{
+			printf("%s\n", line1);
+			free(line1);
+		}
+		if (line2)
+		{
+			printf("%s\n", line2);
+			free(line1);
+		}
 	}
-	char	*line = NULL;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
+	close(fd1);
+	close(fd2);
 	return (0);
 } */

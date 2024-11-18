@@ -6,7 +6,7 @@
 /*   By: olthorel <olthorel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:30:45 by olthorel          #+#    #+#             */
-/*   Updated: 2024/11/17 16:48:19 by olthorel         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:10:06 by olthorel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_free(char *buffer, char *b);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 /* ************************************************************************** */
 /*					GET_NEXT_LINE                                             */
 /* ************************************************************************** */
 
-char	*next_line(char *str);
-char	*ft_read(int fd, char *str);
-char	*ft_get_line(char *str);
+char	*ft_next_line(char *str);
+char	*ft_read_and_stock(int fd, char *str);
+char	*ft_extract_line(char *str);
 char	*get_next_line(int fd);
 
 #endif
