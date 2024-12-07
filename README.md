@@ -1,5 +1,9 @@
 # 📜 Get Next Line
 
+<div align="center">
+  <img height="200" src="https://github.com/leogaudin/42_project_badges/blob/main/badges/get_next_line_bonus.webp"  />
+</div>
+
 **Get Next Line** is a C function that reads a single line from a file descriptor, regardless of its length. This project is commonly featured in programming courses to practice dynamic memory management and file handling in C.
 
 ---
