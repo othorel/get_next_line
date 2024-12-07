@@ -4,6 +4,12 @@
 
 ---
 
+<div align="center">
+  <img height="200" src="https://raw.githubusercontent.com/Benjamin-poisson/My_image_bank/refs/heads/main/born2beroot_succes.png"  />
+</div>
+
+---
+
 ## 📂 Project Structure
 
 The project includes the following files:
@@ -57,6 +63,7 @@ fd: The file descriptor to read from.
 A string containing the next line, or NULL on error or EOF.
 
 ---
+
 ## 📜 Key Rules
 
 1. Memory Management: All allocations must be freed to avoid memory leaks.
@@ -65,3 +72,14 @@ A string containing the next line, or NULL on error or EOF.
 
 ---
 
+## 🛠️ Testing
+
+Use test files or standard input to verify the following:
+
+\. Basic cases: Normal files, single lines, empty files. 
+
+\. Complex cases: Large lines, multiple file descriptors (bonus). 
+
+\. Stress tests: Large files, unusual BUFFER_SIZE values. 
+
+---
