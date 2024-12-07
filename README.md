@@ -57,4 +57,11 @@ fd: The file descriptor to read from.
 A string containing the next line, or NULL on error or EOF.
 
 ---
+## 📜 Key Rules
+
+1. Memory Management: All allocations must be freed to avoid memory leaks.
+2. System Call Optimization: read should only be called when necessary.
+3. Buffer Size: Behavior depends on the BUFFER_SIZE value.
+
+---
 
